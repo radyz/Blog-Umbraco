@@ -108,11 +108,6 @@ Backup*/
 UpgradeLog*.XML
 
 # Umbraco 
-App_Data/TEMP/
-App_Data/ClientDependency/
-App_Data/Logs/
-App_Data/Preview/
-App_Data/umbraco.config
+umbraco.config
 install/
 media/
-
