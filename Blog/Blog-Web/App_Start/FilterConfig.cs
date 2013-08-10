@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 using WebMarkupMin.Mvc.ActionFilters;
 
-namespace Blog_Web.App_Start
+namespace Radyz.Web
 {
     public class FilterConfig
     {

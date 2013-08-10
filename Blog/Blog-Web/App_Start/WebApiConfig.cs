@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Http;
 
-namespace Blog_Web.App_Start
+namespace Radyz.Web
 {
     public class WebApiConfig
     {
