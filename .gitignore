@@ -111,3 +111,6 @@ UpgradeLog*.XML
 umbraco.config
 install/
 media/
+
+# Readme
+App_Readme
