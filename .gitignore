@@ -114,3 +114,6 @@ media/
 
 # Readme
 App_Readme
+
+# schema files
+*.xsd
