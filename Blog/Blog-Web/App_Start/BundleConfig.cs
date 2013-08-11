@@ -5,7 +5,6 @@ using System.Web.Optimization;
 using BundleTransformer.Core.Builders;
 using BundleTransformer.Core.Bundles;
 using BundleTransformer.Core.Orderers;
-using BundleTransformer.Less.Translators;
 
 namespace Radyz.Web
 {
@@ -21,7 +20,7 @@ namespace Radyz.Web
             //Jquery - TODO: It would be awesome to add a build step to get only what we need from jquery
             var jqueryBundle = new CustomScriptBundle("~/bundles/jquery", "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js");
             jqueryBundle.Include("~/scripts/vendor/jquery-{version}.js");
-            //jqueryBundle.CdnFallbackExpression = "window.jquery";
+            jqueryBundle.CdnFallbackExpression = "window.jQuery";
             jqueryBundle.Orderer = nullOrderer;
             bundleCollection.Add(jqueryBundle);
 
