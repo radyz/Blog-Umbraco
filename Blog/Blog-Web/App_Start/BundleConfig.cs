@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Web;
 using System.Web.Optimization;
-using Radyz.Web.Optimization;
+
+using BundleTransformer.Core.Builders;
+using BundleTransformer.Core.Bundles;
+using BundleTransformer.Core.Orderers;
+using BundleTransformer.Less.Translators;
 
 namespace Radyz.Web
 {
@@ -11,22 +15,39 @@ namespace Radyz.Web
         {
             bundleCollection.UseCdn = true;
 
+            var nullBuilder = new NullBuilder();
+            var nullOrderer = new NullOrderer();
+
             //Jquery - TODO: It would be awesome to add a build step to get only what we need from jquery
-            var jqueryCdn = "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js";
-            bundleCollection.Add(new Bundle("~/bundles/jquery", jqueryCdn, new JsMinify())
-                .Include("~/scripts/vendor/jquery-{version}.js"));
+            var jqueryBundle = new CustomScriptBundle("~/bundles/jquery", "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js");
+            jqueryBundle.Include("~/scripts/vendor/jquery-{version}.js");
+            //jqueryBundle.CdnFallbackExpression = "window.jquery";
+            jqueryBundle.Orderer = nullOrderer;
+            bundleCollection.Add(jqueryBundle);
 
             //Modernizr - TODO: same as jquery build step
-            bundleCollection.Add(new Bundle("~/bundles/modernizr", new JsMinify())
-                .Include("~/scripts/vendor/modernizr-2.6.2.js"));
+            var modernizrBundle = new CustomScriptBundle("~/bundles/modernizr");
+            modernizrBundle.Include("~/scripts/vendor/modernizr-2.6.2.js");
+            modernizrBundle.Orderer = nullOrderer;
+            bundleCollection.Add(modernizrBundle);
 
             //Remaining js
-            bundleCollection.Add(new Bundle("~/bundles/site-js", new JsMinify())
-                .Include("~/scripts/main.js", "~/scripts/plugins.js"));
+            var mainjsBundle = new CustomScriptBundle("~/bundles/site-js");
+            mainjsBundle.Include("~/scripts/main.js", "~/scripts/plugins.js");
+            mainjsBundle.Orderer = nullOrderer;
+            bundleCollection.Add(mainjsBundle);
 
-            //Less - TODO: dotless is looking at its last days on the web, need to find a new parser similar to it
-            bundleCollection.Add(new Bundle("~/bundles/site-less", new LessTransform(), new CssMinify())
-                .Include("~/less/main.less"));
+            //Less 
+            var mainlessBundle = new CustomStyleBundle("~/bundles/site-less");
+            mainlessBundle.Include("~/less/main.less");
+            mainlessBundle.Orderer = nullOrderer;
+            bundleCollection.Add(mainlessBundle);
+
+            //Css - Place plugin's css files
+            var maincssBundle = new CustomStyleBundle("~/bundles/site-css");
+            maincssBundle.IncludeDirectory("~/css", "*.css");
+            maincssBundle.Orderer = nullOrderer;
+            bundleCollection.Add(maincssBundle);
         }
     }
 }

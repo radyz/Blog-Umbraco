@@ -17,6 +17,7 @@
 
         <!-- Styles -->
         @Styles.Render("~/bundles/site-less")
+        @*Styles.Render("~/bundles/site-css")*@
 
         <!-- Progressive enhancement -->
         @Scripts.Render("~/bundles/modernizr")
@@ -26,7 +27,6 @@
         @RenderBody()
 
         @Scripts.Render("~/bundles/jquery")
-        <script>window.jQuery || document.write("<script src='@Url.Content("~/scripts/vendor/jquery-1.10.2.js")'><\/script>")</script>
         @Scripts.Render("~/bundles/site-js")
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
